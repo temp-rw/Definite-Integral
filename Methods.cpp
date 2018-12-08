@@ -8,7 +8,7 @@ int trapeze(double &a, double &b, double &res)
 	uns n = 10;
 	double I_h2 = 0, I_h1 = 0, r = 0.5, h = (b - a) / static_cast<double> (n);		//h - step of the grid
 	double x;			//argument of function
-	uns k = 0;			//p = 2 - ïîðÿäîê ïîãðåøíîñòè ìåòîäà
+	uns k = 0;			//p = 2 - 
 	
 	
 	while (true)
