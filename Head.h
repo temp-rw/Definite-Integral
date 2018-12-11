@@ -20,8 +20,9 @@ int trapeze(double &a, double &b, double &result);
 // Square Simpson
 int sq_Simpson(double &a, double &b, double &result);
 
+// Multiple integral
 // Cube Simpson
-void cu_Simpson();
+void cu_Simpson(double &a, double &b, double &c, double &d, double &res);
 
 
 double func(double &x);
