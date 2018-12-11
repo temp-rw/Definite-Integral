@@ -1,6 +1,6 @@
 #include "Head.h"
 
-// Linear integral
+// Integral
 // Trapezoid method
 int trapeze(double &a, double &b, double &res)
 {
@@ -17,7 +17,7 @@ int trapeze(double &a, double &b, double &res)
 		x = a;
 		I_h2 = func(a);
 
-		while (x + h < b) {
+		while (x + h <= b) {
 			x += h;
 			I_h2 += 2 * func(x);
 		}
@@ -39,7 +39,8 @@ int trapeze(double &a, double &b, double &res)
 // Square Simpson
 int sq_Simpson(double &a, double &b, double &res)	
 {
-	double h = (b - a) / static_cast<double>(2 * res);
+	uns n = 10;
+	double h = (b - a) / static_cast<double>(2 * n);
 	double Ih = 0, Ih_2 = 0;
 	double x;
 	double eps = 1e-4;				//or 1e-5
@@ -51,7 +52,7 @@ int sq_Simpson(double &a, double &b, double &res)
 		x = a;
 
 		Ih_2 = func(x);
-		for (x, i = 0; x < b; x += h, i++)
+		for (x, i = 0; x <= b; x += h, i++)
 		{
 			if (i % 2 == 0)
 				Ih_2 += 2 * func(x);
@@ -73,9 +74,35 @@ int sq_Simpson(double &a, double &b, double &res)
 	return static_cast<int>(k);
 }
 
-//Non-linear integral
-//Cube Simpson
-void cu_Simpson()
+// Multiple integral
+// Cube Simpson
+void cu_Simpson(double &a, double &b, double &c, double &d, double &res)
 {
+	uns n, m = n = 5;
+	double eps = 1e-8;//
+	double hx = (b - a) / (2 * n), hy = (d - c) / (2 * m);
+	double x = a, y = c, grd = 0;
 
+	while (true)
+	{
+		res = 0;
+		x = a; y = c;
+		for (uns i, j = i = 0; x <= b, y <= d; x += hx, y += hy, i++, j++)
+		{		
+			if (i % 2 == 0 && j % 2 == 0){
+				res += func(x, y);
+			} else {
+				if (i % 2 == 0 || j % 2 == 0) 
+			{
+					res += 4 * func(x, y);
+				} else res += 16 * func(x, y);
+			}
+		}
+
+		res *= hx * hy / 9.;
+
+		if (fabs(res - grd) < 15. * eps)
+			break;
+		grd = res;
+	}
 }
