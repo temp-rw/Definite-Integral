@@ -8,7 +8,7 @@ void main()
 	SetConsoleTitleA("Lab #5");
 	system("color 0A");
 	
-	double a = 1., b = 2.865, result = 0.;			//a = 1.0, b = 2.835; // var #8
+	double a = 0., b = 1., result = 0.;			//a = 1.0, b = 2.835; // var #8
 
 
 	int number_of_separations = trapeze(a, b, result);
@@ -18,11 +18,11 @@ void main()
 	cout << "\nSquare Simpson Method\nIntegral value: \t"  << setprecision(9) << result << "\nNumber of doubles of separation: " << number_of_separations << endl;
 
 
-	a = 0.;	b = 4.;
+	a = 0., b = 1.;//a = 0.;	b = 4.;
 	double c = 1., d = 2.;
 	
 	cu_Simpson(a, b, c, d, result);
-	cout << "Cube Simpson Method\nIntegral value: \t" << setprecision(9) << result << endl;
+	cout << "\nCube Simpson Method\nIntegral value: \t" << setprecision(9) << result << endl;
 
 	system("pause");
 }
@@ -36,7 +36,7 @@ double func(double &x)
 //function of 2 arguments
 double func(double &x, double &y)	
 {
-	return sin(x + y);//x * x / (1. + y * y);
+	return 1;	//x * x / (1. + y * y);//sin(x + y);//
 }
 
 
