@@ -78,36 +78,70 @@ int sq_Simpson(double &a, double &b, double &res)
 // Cube Simpson
 void cu_Simpson(double &a, double &b, double &c, double &d, double &res)
 {
-	uns n = 1;
-	double eps = 1e-8;//
-	double hx = (b - a) / static_cast<double>(2 * n), hy = (d - c) / static_cast<double>(2 * n); //m == n
+	uns n = 100, m = n;
+	double p = 0, q = 0; // p(for x) and q(for y) are every step multipliers of the parts of the integral sum
+	double eps = 1e-8;
+	double hx = (b - a) / static_cast<double>(2 * n), hy = (d - c) / static_cast<double>(2 * m); //m == n
 	double x = a, y = c, grd = 0;
 
-	//while (true)
-	//{
 		res = 0;
-		x = a; y = c;
-		for (uns i = 0, j = 0; i < 2 * n; i++, j++)
-		{		
-			x = a + i * hx;
-			y = c + i * hy;
-			if (i % 2 == 0 && j % 2 == 0){
-				res += func(x, y);
-			} else {
-				if (i % 2 == 0 || j % 2 == 0) 
+		x = a; y = c; 
+
+		for (uns i = 0; i < 2 * n + 2; i++)
+		{
+			x = a + hx * i;
+			if (i == 0 || i == 2 * n)
+			{		
+				p = 1;
+			} else if (i % 2 == 0)
+			{
+				p = 4;
+			}
+			else p = 2;
+
+			for (uns j = 0; j < 2 * m + 2; j++)
+			{
+				y = c + hy * j;
+				if (j == 0 || j == 2 * m)
+				{		
+					q = 1;
+				}
+				else if (j % 2 == 0)
 				{
-					res += 4 * func(x, y);
-				} 
-				else res += 16 * func(x, y);
+					q = 4;
+				}
+				else q = 2;
+
+				res += p * q * func(x, y);
 			}
 		}
 
+		
+		//for (uns i = 0; i < 2 * n + 1; i++)
+		//{		
+		//	x = a + i * hx;
+		//	for (uns j = 0; j < 2 * n + 1; j++)
+		//	{
+		//		y = c + j * hy;
+		//		if (i % 2 == 0 && j % 2 == 0) 
+		//		{
+		//			res += func(x, y);
+		//		} else {
+		//			if (i % 2 == 0 || j % 2 == 0)
+		//			{
+		//				res += 4 * func(x, y);
+		//			}
+		//			else res += 16 * func(x, y);
+		//		}
+		//	}
+		//}
+		
 		res *= (hx * hy) / 9.;
 
 		//if (fabs(res - grd) < 15. * eps)
 			//break;
-		n *= 2;
+		/*n *= 2;
 		hx /= 2; hy /= 2;
-		grd = res;
+		grd = res;*/
 	//}
 }
