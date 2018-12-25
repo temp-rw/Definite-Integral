@@ -78,7 +78,7 @@ int sq_Simpson(double &a, double &b, double &res)
 // Cube Simpson
 void cu_Simpson(double &a, double &b, double &c, double &d, double &res)
 {
-	uns n = 100, m = n;
+	uns n = 1, m = n;
 	double p = 0, q = 0; // p(for x) and q(for y) are every step multipliers of the parts of the integral sum
 	double eps = 1e-8;
 	double hx = (b - a) / static_cast<double>(2 * n), hy = (d - c) / static_cast<double>(2 * m); //m == n
