@@ -118,7 +118,7 @@ void cu_Simpson(double &a, double &b, double &c, double &d, double &res)
 
 		
 		//for (uns i = 0; i < 2 * n + 1; i++)
-		//{		
+		{		
 		//	x = a + i * hx;
 		//	for (uns j = 0; j < 2 * n + 1; j++)
 		//	{
@@ -134,7 +134,7 @@ void cu_Simpson(double &a, double &b, double &c, double &d, double &res)
 		//			else res += 16 * func(x, y);
 		//		}
 		//	}
-		//}
+		}
 		
 		res *= (hx * hy) / 9.;
 
